@@ -1,14 +1,24 @@
 [Desktop Entry]
-Name=NetEase Cloud Music
+# 名称：中文优先，同时保留英文，便于开始菜单/启动器按各种关键词搜索
+Name=网易云音乐
 Name[zh_CN]=网易云音乐
-Comment=NetEase Cloud Music client
+Name[en]=NetEase Cloud Music
+Name[en_US]=NetEase Cloud Music
+GenericName=音乐播放器
+GenericName[zh_CN]=音乐播放器
+GenericName[en]=Music Player
+Comment=网易云音乐 Linux 客户端
 Comment[zh_CN]=网易云音乐 Linux 客户端
+Comment[en]=NetEase Cloud Music client for Linux
+Comment[en_US]=NetEase Cloud Music client for Linux
 Exec=netease-cloud-music %U
 Terminal=false
 Type=Application
 Icon=netease-cloud-music
 StartupWMClass=NeteaseCloudMusic
 StartupNotify=true
-Categories=AudioVideo;Audio;Player;Qt;
-Keywords=music;audio;player;netease;云音乐;音乐;
+Categories=AudioVideo;Audio;Player;
+# Keywords 是开始菜单搜索的匹配源：覆盖中文、拼音、英文与常见写法，
+# 保证搜索「网易」「网易云」「wangyiyun」「netease」「cloudmusic」都能命中
+Keywords=网易云;网易云音乐;网易;云音乐;音乐;播放器;wangyiyun;wangyiyunyinyue;yinyue;netease;neteasemusic;neteasecloudmusic;cloudmusic;music;player;audio;163;
 MimeType=x-scheme-handler/netease-music;

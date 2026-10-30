@@ -66,12 +66,23 @@
       "description": "非官方网易云音乐 Linux 桌面客户端，支持播放/歌词/登录/MPRIS 等",
       "executableName": "netease-cloud-music",
       "desktop": {
-        "Name": "NetEase Cloud Music",
-        "Comment": "NetEase Cloud Music client",
+        "Name": "网易云音乐",
+        "Name[zh_CN]": "网易云音乐",
+        "Name[en]": "NetEase Cloud Music",
+        "Name[en_US]": "NetEase Cloud Music",
+        "GenericName": "音乐播放器",
+        "GenericName[zh_CN]": "音乐播放器",
+        "GenericName[en]": "Music Player",
+        "Comment": "网易云音乐 Linux 客户端",
+        "Comment[zh_CN]": "网易云音乐 Linux 客户端",
+        "Comment[en]": "NetEase Cloud Music client for Linux",
+        "Comment[en_US]": "NetEase Cloud Music client for Linux",
         "StartupWMClass": "NeteaseCloudMusic",
         "StartupNotify": "true",
         "Terminal": "false",
-        "Categories": "AudioVideo;Audio;Player;"
+        "Categories": "AudioVideo;Audio;Player;",
+        "Keywords": "网易云;网易云音乐;网易;云音乐;音乐;播放器;wangyiyun;wangyiyunyinyue;yinyue;netease;neteasemusic;neteasecloudmusic;cloudmusic;music;player;audio;163;",
+        "MimeType": "x-scheme-handler/netease-music;"
       }
     },
     "deb": {
