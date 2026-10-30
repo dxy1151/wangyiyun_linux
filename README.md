@@ -45,22 +45,25 @@
 
 ## 📦 安装
 
+> 安装包体积超过 GitHub 单文件限制（100MB），不放在仓库里。
+> 请到 [**Releases**](https://github.com/dxy1151/wangyiyun_linux/releases) 页面下载，或按下方「从源码构建」自行打包。
+
 ### Debian / Ubuntu（deb）
 ```bash
-sudo dpkg -i release/NeteaseCloudMusic-1.0.0-amd64.deb
+sudo dpkg -i NeteaseCloudMusic-1.0.0-amd64.deb
 sudo apt-get install -f      # 若提示缺少依赖
 ```
 
 ### Fedora / RHEL / openSUSE（rpm）
 ```bash
-sudo rpm -ivh release/netease-cloud-music-1.0.0-1.x86_64.rpm
-# 或： sudo dnf install ./release/netease-cloud-music-1.0.0-1.x86_64.rpm
+sudo rpm -ivh netease-cloud-music-1.0.0-1.x86_64.rpm
+# 或： sudo dnf install ./netease-cloud-music-1.0.0-1.x86_64.rpm
 ```
 
 ### 任意发行版（AppImage，免安装）
 ```bash
-chmod +x release/NeteaseCloudMusic-1.0.0-x86_64.AppImage
-./release/NeteaseCloudMusic-1.0.0-x86_64.AppImage
+chmod +x NeteaseCloudMusic-1.0.0-x86_64.AppImage
+./NeteaseCloudMusic-1.0.0-x86_64.AppImage
 ```
 
 安装后可从应用菜单启动，或命令行执行 `netease-cloud-music`。
