@@ -1,0 +1,333 @@
+.nt-playerbar {
+  position: relative;
+  flex: 0 0 auto;
+  height: var(--playerbar-h);
+  background: var(--bg-player);
+  border-top: 1px solid var(--border-subtle);
+  z-index: var(--z-playerbar);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  backdrop-filter: blur(20px) saturate(1.3);
+}
+
+/* 顶部 2px 进度条 */
+.nt-playerbar__topline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.nt-playerbar__topline-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--nt-red), #ff8a8a);
+  transition: width 0.25s linear;
+  border-radius: 0 var(--r-full) var(--r-full) 0;
+}
+
+.nt-playerbar__inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  padding: 0 20px;
+}
+
+/* ------------------------------ 左：封面 + 信息 ------------------------------ */
+.nt-playerbar__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 1 300px;
+  min-width: 150px;
+}
+
+.nt-playerbar__cover-btn {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 0;
+  border-radius: 50%;
+  outline: none;
+}
+
+.nt-playerbar__disc {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 旋转动画：暂停时 animation-play-state: paused */
+.nt-playerbar__cover-btn.is-playing .nt-playerbar__disc .nt-cover {
+  animation: nt-spin 20s linear infinite;
+  animation-play-state: running;
+}
+
+.nt-playerbar__cover-btn:not(.is-playing) .nt-playerbar__disc .nt-cover {
+  animation: nt-spin 20s linear infinite;
+  animation-play-state: paused;
+}
+
+.nt-playerbar__disc .nt-cover {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+}
+
+/* 唱片中心孔 */
+.nt-playerbar__disc::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-player);
+  border: 2px solid var(--border-strong);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* 唱针 */
+.nt-playerbar__needle {
+  position: absolute;
+  top: -6px;
+  right: 4px;
+  width: 2px;
+  height: 14px;
+  border-radius: 1px;
+  background: linear-gradient(180deg, var(--text-tertiary), transparent);
+  transform-origin: top center;
+  transform: rotate(-24deg);
+  transition: transform var(--dur-slow) var(--ease);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.nt-playerbar__cover-btn.is-playing .nt-playerbar__needle {
+  transform: rotate(-8deg);
+}
+
+.nt-playerbar__cover-btn:hover .nt-playerbar__disc .nt-cover {
+  transform: scale(1.03);
+}
+
+.nt-playerbar__meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.nt-playerbar__titleline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.nt-playerbar__title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.nt-playerbar__title:hover {
+  color: var(--nt-red);
+}
+
+.nt-playerbar__like {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  border-radius: var(--r-xs);
+  color: var(--text-tertiary);
+  opacity: 0;
+  transition: opacity var(--dur-fast), color var(--dur-fast);
+}
+
+.nt-playerbar__left:hover .nt-playerbar__like,
+.nt-playerbar__like.is-liked {
+  opacity: 1;
+}
+
+.nt-playerbar__like.is-liked {
+  color: var(--nt-red);
+}
+
+.nt-playerbar__subline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 26px;
+}
+
+.nt-playerbar__artist {
+  flex: 0 1 auto;
+  max-width: 45%;
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color var(--dur-fast);
+}
+
+.nt-playerbar__artist:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.nt-playerbar__lyrics {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.nt-playerbar__hint {
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+}
+
+/* ------------------------------ 中：控制 + 进度 ------------------------------ */
+.nt-playerbar__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.nt-playerbar__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nt-playerbar__play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--nt-red);
+  color: #fff;
+  box-shadow: 0 3px 12px var(--nt-red-glow);
+  transition:
+    background-color var(--dur-fast),
+    transform var(--dur-fast) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.nt-playerbar__play:hover:not(:disabled) {
+  background: var(--nt-red-strong);
+  transform: scale(1.06);
+  box-shadow: 0 5px 18px var(--nt-red-glow);
+}
+
+.nt-playerbar__play:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.nt-playerbar__play:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* 播放/暂停图标略作光学居中 */
+.nt-playerbar__play svg {
+  margin-left: 1px;
+}
+
+.nt-playerbar__play svg[data-lucide='pause'] {
+  margin-left: 0;
+}
+
+.nt-playerbar__progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.nt-playerbar__time {
+  flex: 0 0 auto;
+  min-width: 38px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+/* ------------------------------ 右：音量 + 队列 ------------------------------ */
+.nt-playerbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 1 300px;
+  justify-content: flex-end;
+  min-width: 120px;
+}
+
+.nt-playerbar__volume {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nt-playerbar__queue-btn svg {
+  pointer-events: none;
+}
+
+/* ------------------------------ 响应式 ------------------------------ */
+@media (max-width: 1120px) {
+  .nt-playerbar__left {
+    flex-basis: 230px;
+  }
+  .nt-playerbar__right {
+    flex-basis: 200px;
+  }
+}
+
+@media (max-width: 980px) {
+  .nt-playerbar__inner {
+    gap: 10px;
+    padding: 0 12px;
+  }
+  .nt-playerbar__lyrics {
+    display: none;
+  }
+  .nt-playerbar__title {
+    font-size: var(--fs-sm);
+  }
+  .nt-playerbar__volume .nt-volume {
+    display: none;
+  }
+  .nt-playerbar__controls {
+    gap: 4px;
+  }
+}
+
+@media (max-width: 800px) {
+  .nt-playerbar__left {
+    flex-basis: 150px;
+  }
+  .nt-playerbar__time {
+    min-width: 30px;
+  }
+}

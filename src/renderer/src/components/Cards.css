@@ -1,0 +1,315 @@
+/* ============================================================
+   卡片：歌单 / 专辑 / 歌手 / 排行榜
+   ============================================================ */
+
+.nt-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  border-radius: var(--r-md);
+  outline: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+.nt-card:hover {
+  transform: translateY(-4px);
+}
+
+.nt-card:active {
+  transform: translateY(-1px);
+}
+
+.nt-card__cover-wrap {
+  position: relative;
+  border-radius: 12px;
+  isolation: isolate;
+  transition: box-shadow var(--dur) var(--ease);
+}
+
+.nt-card:hover .nt-card__cover-wrap {
+  box-shadow: var(--shadow-md);
+}
+
+.nt-card__cover {
+  width: 100%;
+}
+
+.nt-card:hover .nt-card__cover .nt-cover__img {
+  transform: scale(1.06);
+}
+
+/* 播放按钮：hover 浮现 */
+.nt-card__play {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--nt-red);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
+  opacity: 0;
+  transform: translateY(6px) scale(0.9);
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease),
+    background-color var(--dur-fast);
+}
+
+.nt-card__play:hover {
+  background: #fff;
+  transform: translateY(0) scale(1.06) !important;
+}
+
+.nt-card:hover .nt-card__play,
+.nt-card:focus-visible .nt-card__play {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 播放量角标 */
+.nt-card__count {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: var(--r-full);
+  background: rgba(0, 0, 0, 0.46);
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.nt-card__badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+  background: rgba(0, 0, 0, 0.46);
+  color: #fff;
+  font-size: var(--fs-xs);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.nt-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding: 0 2px;
+}
+
+.nt-card__title {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary);
+  transition: color var(--dur-fast);
+  /* 固定两行高度，保证同一行卡片底部对齐 */
+  min-height: calc(1.4em * 2);
+}
+
+.nt-card:hover .nt-card__title {
+  color: var(--nt-red);
+}
+
+.nt-card__sub {
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+}
+
+/* ------------------------------ 歌手卡片 ------------------------------ */
+.nt-artist-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 6px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background-color var(--dur) ease, transform var(--dur) var(--ease);
+}
+
+.nt-artist-card:hover {
+  background: var(--bg-card);
+  transform: translateY(-3px);
+}
+
+.nt-artist-card__avatar {
+  position: relative;
+  width: 84%;
+  max-width: 132px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+.nt-artist-card__avatar .nt-cover {
+  width: 100%;
+  height: 100%;
+  box-shadow: var(--shadow-cover);
+}
+
+.nt-artist-card:hover .nt-artist-card__avatar .nt-cover__img {
+  transform: scale(1.06);
+}
+
+.nt-artist-card__ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(140deg, var(--nt-red), transparent 60%) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+
+.nt-artist-card:hover .nt-artist-card__ring {
+  opacity: 1;
+}
+
+.nt-artist-card__name {
+  max-width: 100%;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.nt-artist-card:hover .nt-artist-card__name {
+  color: var(--nt-red);
+}
+
+.nt-artist-card__alias {
+  max-width: 100%;
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+/* ------------------------------ 排行榜卡片 ------------------------------ */
+.nt-rank-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--r-md);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: background-color var(--dur) ease, transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.nt-rank-card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.nt-rank-card__top {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.nt-rank-card__head {
+  flex: 1;
+  min-width: 0;
+}
+
+.nt-rank-card__name {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.nt-rank-card:hover .nt-rank-card__name {
+  color: var(--nt-red);
+}
+
+.nt-rank-card__freq {
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.nt-rank-card__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--nt-red);
+  color: #fff;
+  opacity: 0;
+  transform: scale(0.85);
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.nt-rank-card:hover .nt-rank-card__play {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nt-rank-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nt-rank-card__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  min-width: 0;
+}
+
+.nt-rank-card__idx {
+  flex: 0 0 16px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.nt-rank-card__idx.is-top {
+  color: var(--nt-red);
+}
+
+.nt-rank-card__song {
+  min-width: 0;
+  flex: 1;
+}
+
+.nt-rank-card__artist {
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+}
+
+.nt-rank-card__empty {
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  padding: 8px 0;
+}

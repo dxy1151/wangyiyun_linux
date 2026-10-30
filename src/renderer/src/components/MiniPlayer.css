@@ -1,0 +1,254 @@
+/* ============================================================
+   迷你播放器（320 x 120）
+   ============================================================ */
+
+.nt-mini {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 0;
+  background: var(--bg-root);
+  color: var(--text-primary);
+  isolation: isolate;
+  user-select: none;
+}
+
+/* 背景：封面模糊 + 深色遮罩 */
+.nt-mini__bg {
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(1.5) brightness(0.44);
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.nt-mini::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(160deg, rgba(10, 10, 12, 0.55), rgba(10, 10, 12, 0.78));
+  pointer-events: none;
+}
+
+/* ------------------------------ 顶部 ------------------------------ */
+.nt-mini__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 24px;
+  flex: 0 0 24px;
+  padding: 0 6px 0 10px;
+}
+
+.nt-mini__brand {
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+}
+
+.nt-mini__wbtn-group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.nt-mini__wbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--r-xs);
+  color: rgba(255, 255, 255, 0.6);
+  transition: background-color var(--dur-fast), color var(--dur-fast);
+}
+
+.nt-mini__wbtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.nt-mini__wbtn.is-close:hover {
+  background: #e81123;
+}
+
+/* ------------------------------ 主体 ------------------------------ */
+.nt-mini__body {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0 12px;
+}
+
+.nt-mini__cover-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+}
+
+.nt-mini__disc {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.nt-mini__disc .nt-cover {
+  animation: nt-spin 20s linear infinite;
+  animation-play-state: paused;
+}
+
+.nt-mini__cover-wrap.is-playing .nt-mini__disc .nt-cover {
+  animation-play-state: running;
+}
+
+.nt-mini__spinner {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.85);
+  animation: nt-spin 0.85s linear infinite;
+}
+
+.nt-mini__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.nt-mini__title-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.nt-mini__title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: #fff;
+}
+
+.nt-mini__like {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color var(--dur-fast), transform var(--dur-fast);
+}
+
+.nt-mini__like:hover {
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.12);
+}
+
+.nt-mini__like.is-liked {
+  color: #ff5c6c;
+}
+
+.nt-mini__artist {
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.nt-mini__lyric {
+  margin-top: 1px;
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.42);
+  font-style: italic;
+  min-height: 14px;
+}
+
+/* ------------------------------ 进度 ------------------------------ */
+.nt-mini__progress {
+  position: relative;
+  height: 3px;
+  flex: 0 0 3px;
+  margin: 0 12px;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  transition: height var(--dur-fast);
+}
+
+.nt-mini__progress:hover {
+  height: 5px;
+}
+
+.nt-mini__progress-fill {
+  height: 100%;
+  border-radius: var(--r-full);
+  background: linear-gradient(90deg, #ff4d5e, #ff8f9c);
+  transition: width 0.2s linear;
+}
+
+/* ------------------------------ 控制 ------------------------------ */
+.nt-mini__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 34px;
+  flex: 0 0 34px;
+}
+
+.nt-mini__ctrl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.82);
+  transition: background-color var(--dur-fast), color var(--dur-fast), transform var(--dur-fast) var(--ease);
+}
+
+.nt-mini__ctrl:hover:not(:disabled) {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.nt-mini__ctrl:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+.nt-mini__ctrl.is-primary {
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  color: #1c1c21;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+.nt-mini__ctrl.is-primary:hover:not(:disabled) {
+  background: #fff;
+  transform: scale(1.07);
+}
+
+.nt-mini__ctrl:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

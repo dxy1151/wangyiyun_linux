@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=NetEase Cloud Music
+Name[zh_CN]=网易云音乐
+Comment=NetEase Cloud Music client
+Comment[zh_CN]=网易云音乐 Linux 客户端
+Exec=netease-cloud-music %U
+Terminal=false
+Type=Application
+Icon=netease-cloud-music
+StartupWMClass=NeteaseCloudMusic
+StartupNotify=true
+Categories=AudioVideo;Audio;Player;Qt;
+Keywords=music;audio;player;netease;云音乐;音乐;
+MimeType=x-scheme-handler/netease-music;

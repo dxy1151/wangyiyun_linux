@@ -1,0 +1,113 @@
+/* ============================================================
+   搜索页
+   ============================================================ */
+
+.nt-search-page__tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: var(--r-full);
+  background: var(--bg-card);
+  align-self: flex-start;
+  margin-top: -8px;
+}
+
+.nt-search-page__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 16px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  transition:
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+
+.nt-search-page__tab:hover {
+  color: var(--text-primary);
+}
+
+.nt-search-page__tab.is-active {
+  background: var(--nt-red);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 3px 12px var(--nt-red-glow);
+}
+
+.nt-search-page__tab-count {
+  padding: 0 6px;
+  border-radius: var(--r-full);
+  background: var(--bg-tag);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  line-height: 16px;
+}
+
+.nt-search-page__tab.is-active .nt-search-page__tab-count {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* ------------------------------ 热搜词 ------------------------------ */
+.nt-search-page__hotwords {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px;
+  border-radius: var(--r-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.nt-search-page__hotwords-title {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.nt-search-page__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nt-search-page__chip {
+  height: 30px;
+  padding: 0 15px;
+  border-radius: var(--r-full);
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  transition:
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    transform var(--dur-fast) var(--ease);
+}
+
+.nt-search-page__chip:hover {
+  border-color: var(--nt-red);
+  color: var(--nt-red);
+  transform: translateY(-1px);
+}
+
+.nt-search-page__focus-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  background: var(--bg-tag);
+}
+
+.nt-search-page__focus-btn:hover {
+  color: var(--text-primary);
+}

@@ -1,0 +1,124 @@
+/* ============================================================
+   页面通用布局
+   ============================================================ */
+
+.nt-page {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: 22px 30px 40px;
+  animation: nt-fade-in 0.28s var(--ease);
+}
+
+.nt-page__titlebar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 2px;
+}
+
+.nt-page__headings {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.nt-page__title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+.nt-page__subtitle {
+  font-size: var(--fs-md);
+  color: var(--text-tertiary);
+}
+
+.nt-page__extra {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+/* ------------------------------ 区块 ------------------------------ */
+.nt-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nt-section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nt-section__title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.1px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.nt-section__title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 15px;
+  border-radius: var(--r-full);
+  background: linear-gradient(180deg, var(--nt-red), #ff8a8a);
+}
+
+.nt-section__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  padding: 3px 8px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  transition: color var(--dur-fast), background-color var(--dur-fast);
+}
+
+.nt-section__action:hover {
+  color: var(--nt-red);
+  background: var(--hover-bg);
+}
+
+/* ------------------------------ 卡片网格 ------------------------------ */
+.nt-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-min, 150px), 1fr));
+  gap: 24px 20px;
+}
+
+/* ------------------------------ 响应式 ------------------------------ */
+@media (max-width: 1100px) {
+  .nt-page {
+    padding: 18px 22px 34px;
+    gap: 22px;
+  }
+}
+
+@media (max-width: 940px) {
+  .nt-page {
+    padding: 16px 18px 30px;
+    gap: 20px;
+  }
+  .nt-page__title {
+    font-size: var(--fs-xl);
+  }
+  .nt-card-grid {
+    gap: 18px 14px;
+  }
+}

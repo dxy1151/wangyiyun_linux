@@ -1,0 +1,104 @@
+/* ============================================================
+   歌手页专属
+   ============================================================ */
+
+.nt-artist-head__inner {
+  align-items: center;
+}
+
+.nt-artist-head__avatar {
+  flex: 0 0 auto;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.08));
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
+}
+
+.nt-artist-head__alias {
+  font-size: var(--fs-md);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.nt-artist-head__brief {
+  max-width: 680px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Tab 栏 */
+.nt-artist-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nt-artist-tabs__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  transition: color var(--dur-fast);
+}
+
+.nt-artist-tabs__tab::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: var(--r-full);
+  background: var(--nt-red);
+  transform: scaleX(0);
+  transition: transform var(--dur) var(--ease);
+}
+
+.nt-artist-tabs__tab:hover {
+  color: var(--text-primary);
+}
+
+.nt-artist-tabs__tab.is-active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.nt-artist-tabs__tab.is-active::after {
+  transform: scaleX(1);
+}
+
+.nt-artist-tabs__count {
+  padding: 0 6px;
+  border-radius: var(--r-full);
+  background: var(--bg-tag);
+  font-size: 10px;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-tertiary);
+}
+
+/* 简介正文 */
+.nt-artist-bio {
+  max-width: 900px;
+  font-size: var(--fs-md);
+  line-height: 1.85;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.nt-artist-bio__meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}

@@ -1,0 +1,46 @@
+.nt-cover {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  isolation: isolate;
+}
+
+.nt-cover.has-shadow {
+  box-shadow: var(--shadow-cover);
+}
+
+.nt-cover__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+  will-change: opacity, transform;
+}
+
+.nt-cover__img.is-loaded {
+  opacity: 1;
+}
+
+.nt-cover__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.72);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), transparent 60%);
+}
+
+.nt-cover__shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.14) 50%, transparent 80%);
+  background-size: 220% 100%;
+  animation: nt-shimmer 1.4s linear infinite;
+  pointer-events: none;
+}

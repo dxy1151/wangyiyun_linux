@@ -1,0 +1,169 @@
+/* ============================================================
+   网易云音乐 Linux 客户端 — 设计令牌
+   主题通过 <html data-theme="dark|light"> 切换
+   ============================================================ */
+
+:root {
+  /* 品牌色 */
+  --nt-red: #ec4141;
+  --nt-red-strong: #e60026;
+  --nt-red-soft: rgba(236, 65, 65, 0.14);
+  --nt-red-glow: rgba(236, 65, 65, 0.42);
+  --nt-blue: #3f7de6;
+
+  /* 字号 */
+  --fs-xs: 11px;
+  --fs-sm: 12px;
+  --fs-md: 13px;
+  --fs-base: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 26px;
+  --fs-3xl: 34px;
+
+  /* 圆角 */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-full: 999px;
+
+  /* 间距 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  /* 尺寸 */
+  --titlebar-h: 46px;
+  --playerbar-h: 80px;
+  --sidebar-w: 208px;
+  --sidebar-w-collapsed: 68px;
+
+  /* 动效 */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.14s;
+  --dur: 0.22s;
+  --dur-slow: 0.42s;
+
+  /* 层级 */
+  --z-sidebar: 40;
+  --z-playerbar: 60;
+  --z-queue: 70;
+  --z-menu: 90;
+  --z-modal: 100;
+  --z-toast: 120;
+}
+
+/* ------------------------------ 深色（默认） ------------------------------ */
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg-root: #121212;
+  --bg-app: #121212;
+  --bg-sidebar: #17171a;
+  --bg-titlebar: #1b1b1f;
+  --bg-elevated: #1f1f24;
+  --bg-card: #1f1f24;
+  --bg-card-hover: #2a2a31;
+  --bg-player: #191a1e;
+  --bg-input: #24242a;
+  --bg-input-hover: #2c2c33;
+  --bg-scrim: rgba(0, 0, 0, 0.62);
+  --bg-skeleton: linear-gradient(90deg, #202027 25%, #2b2b34 37%, #202027 63%);
+  --bg-tag: rgba(255, 255, 255, 0.08);
+
+  --text-primary: #ececf1;
+  --text-secondary: #a8a8b3;
+  --text-tertiary: #75757f;
+  --text-inverse: #121212;
+  --text-on-accent: #ffffff;
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
+
+  --hover-bg: rgba(255, 255, 255, 0.06);
+  --active-bg: rgba(255, 255, 255, 0.1);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+  --shadow-cover: 0 8px 20px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 6px 18px rgba(236, 65, 65, 0.35);
+
+  --lyric-dim: rgba(255, 255, 255, 0.42);
+  --lyric-active-from: #ffffff;
+  --lyric-active-to: #ff9d9d;
+
+  --scrollbar-thumb: rgba(255, 255, 255, 0.16);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+
+  --overlay-tint: rgba(0, 0, 0, 0.55);
+  --skeleton-base: #202027;
+  --skeleton-sheen: #2e2e37;
+}
+
+/* ------------------------------ 浅色 ------------------------------ */
+html[data-theme='light'] {
+  color-scheme: light;
+
+  --bg-root: #f4f5f7;
+  --bg-app: #ffffff;
+  --bg-sidebar: #f2f3f5;
+  --bg-titlebar: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-card: #f7f7f9;
+  --bg-card-hover: #ededf1;
+  --bg-player: #fbfbfc;
+  --bg-input: #f0f1f3;
+  --bg-input-hover: #e8e9ec;
+  --bg-scrim: rgba(20, 20, 24, 0.4);
+  --bg-skeleton: linear-gradient(90deg, #e9eaee 25%, #f3f4f7 37%, #e9eaee 63%);
+  --bg-tag: rgba(0, 0, 0, 0.06);
+
+  --text-primary: #1c1c21;
+  --text-secondary: #5d5d68;
+  --text-tertiary: #9a9aa4;
+  --text-inverse: #ffffff;
+  --text-on-accent: #ffffff;
+
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --border: rgba(0, 0, 0, 0.09);
+  --border-strong: rgba(0, 0, 0, 0.16);
+
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  --active-bg: rgba(0, 0, 0, 0.09);
+
+  --shadow-sm: 0 1px 3px rgba(20, 20, 30, 0.08);
+  --shadow-md: 0 6px 18px rgba(20, 20, 30, 0.1);
+  --shadow-lg: 0 16px 40px rgba(20, 20, 30, 0.16);
+  --shadow-cover: 0 8px 20px rgba(20, 20, 30, 0.18);
+  --shadow-accent: 0 6px 18px rgba(236, 65, 65, 0.28);
+
+  --lyric-dim: rgba(0, 0, 0, 0.34);
+  --lyric-active-from: #1c1c21;
+  --lyric-active-to: #e60026;
+
+  --scrollbar-thumb: rgba(0, 0, 0, 0.16);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.28);
+
+  --overlay-tint: rgba(255, 255, 255, 0.5);
+  --skeleton-base: #e9eaee;
+  --skeleton-sheen: #f5f6f8;
+}
+
+/* 主题切换过渡（仅颜色属性，避免布局抖动） */
+html.theme-anim,
+html.theme-anim * {
+  transition:
+    background-color 0.28s ease,
+    border-color 0.28s ease,
+    color 0.28s ease !important;
+}

@@ -1,0 +1,60 @@
+.nt-songlist {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nt-songlist__head {
+  display: grid;
+  grid-template-columns: 44px 48px minmax(140px, 2.2fr) minmax(90px, 1.2fr) minmax(80px, 1.4fr) 56px 64px;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  margin-bottom: 2px;
+}
+
+.nt-songlist.is-dense .nt-songlist__head {
+  grid-template-columns: 40px 48px minmax(140px, 2.2fr) minmax(90px, 1.2fr) minmax(80px, 1.4fr) 56px 64px;
+  height: 30px;
+}
+
+.nt-songlist__h-idx {
+  padding-left: 6px;
+}
+
+.nt-songlist__h-title,
+.nt-songlist__h-artist,
+.nt-songlist__h-album {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nt-songlist__h-dur {
+  text-align: right;
+  padding-right: 4px;
+}
+
+.nt-songlist__h-actions {
+  text-align: right;
+  font-size: var(--fs-xs);
+}
+
+.nt-songlist__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+@media (max-width: 1080px) {
+  .nt-songlist__head {
+    grid-template-columns: 40px 48px minmax(120px, 2fr) minmax(80px, 1.2fr) 52px 60px;
+  }
+  .nt-songlist__h-album {
+    display: none;
+  }
+}

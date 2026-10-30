@@ -1,0 +1,93 @@
+{
+  "name": "netease-cloud-music-linux",
+  "version": "1.0.0",
+  "description": "网易云音乐 Linux 桌面客户端（非官方）",
+  "main": "./out/main/index.js",
+  "author": {
+    "name": "dxy1151",
+    "email": "dxy1151@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/dxy1151/wangyiyun_linux",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "npm run typecheck && electron-vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "start": "electron-vite preview",
+    "icon": "node scripts/gen-icon.mjs",
+    "dist": "npm run build && electron-builder --linux AppImage deb && npm run dist:rpm",
+    "dist:dir": "npm run build && electron-builder --linux dir",
+    "rebuild": "electron-builder install-app-deps",
+    "dist:rpm": "node scripts/build-rpm.mjs",
+    "dist:all": "npm run dist"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/mime-types": "^2.1.4",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "lucide-react": "^0.451.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  },
+  "build": {
+    "appId": "com.don0ox1.neteasemusic",
+    "productName": "NeteaseCloudMusic",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "npmRebuild": false,
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "AudioVideo",
+      "icon": "build/icon.png",
+      "maintainer": "dxy1151 <dxy1151@users.noreply.github.com>",
+      "synopsis": "网易云音乐 Linux 客户端",
+      "description": "非官方网易云音乐 Linux 桌面客户端，支持播放/歌词/登录/MPRIS 等",
+      "executableName": "netease-cloud-music",
+      "desktop": {
+        "Name": "NetEase Cloud Music",
+        "Comment": "NetEase Cloud Music client",
+        "StartupWMClass": "NeteaseCloudMusic",
+        "StartupNotify": "true",
+        "Terminal": "false",
+        "Categories": "AudioVideo;Audio;Player;"
+      }
+    },
+    "deb": {
+      "depends": [
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libgtk-3-0",
+        "libgbm1"
+      ]
+    },
+    "appImage": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.nt-recent__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nt-recent__filters {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: -12px;
+}
+
+.nt-recent__filter {
+  height: 26px;
+  padding: 0 13px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  transition: background-color var(--dur-fast), color var(--dur-fast);
+}
+
+.nt-recent__filter:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+}
+
+.nt-recent__filter.is-active {
+  background: var(--nt-red);
+  color: #fff;
+  font-weight: 500;
+}
+
+.nt-recent__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nt-recent__group-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 2px 2px 2px 6px;
+}

@@ -1,0 +1,193 @@
+.nt-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: var(--titlebar-h);
+  flex: 0 0 auto;
+  padding: 0 0 0 10px;
+  background: var(--bg-titlebar);
+  border-bottom: 1px solid var(--border-subtle);
+  user-select: none;
+  position: relative;
+  z-index: 50;
+}
+
+/* 兼容部分 Linux 窗口管理器：拖拽区域需要明确高度 */
+.nt-titlebar > * {
+  position: relative;
+}
+
+.nt-titlebar__left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.nt-titlebar__navbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-full);
+  color: var(--text-secondary);
+  transition: background-color var(--dur-fast), color var(--dur-fast);
+}
+
+.nt-titlebar__navbtn:hover:not(:disabled) {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.nt-titlebar__navbtn.is-disabled,
+.nt-titlebar__navbtn:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+.nt-titlebar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: 6px;
+  padding: 4px 8px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: background-color var(--dur-fast);
+}
+
+.nt-titlebar__brand:hover {
+  background: var(--hover-bg);
+}
+
+.nt-titlebar__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(140deg, var(--nt-red), var(--nt-red-strong));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 8px var(--nt-red-glow);
+}
+
+.nt-titlebar__name {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* ------------------------------ 搜索框 ------------------------------ */
+.nt-search {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 1 380px;
+  max-width: 380px;
+  min-width: 160px;
+  height: 30px;
+  margin: 0 auto;
+  padding: 0 10px;
+  border-radius: var(--r-full);
+  background: var(--bg-input);
+  border: 1px solid transparent;
+  transition: border-color var(--dur), background-color var(--dur), box-shadow var(--dur);
+}
+
+.nt-search:focus-within {
+  background: var(--bg-input-hover);
+  border-color: var(--nt-red-soft);
+  box-shadow: 0 0 0 3px var(--nt-red-soft);
+}
+
+.nt-search__icon {
+  color: var(--text-tertiary);
+  flex: 0 0 auto;
+}
+
+.nt-search__input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  font-size: var(--fs-md);
+  color: var(--text-primary);
+}
+
+.nt-search__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  color: var(--bg-app);
+  flex: 0 0 auto;
+  opacity: 0.75;
+  transition: opacity var(--dur-fast);
+}
+
+.nt-search__clear:hover {
+  opacity: 1;
+}
+
+.nt-search__kbd {
+  flex: 0 0 auto;
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
+  font-size: 10px;
+  font-family: inherit;
+  color: var(--text-tertiary);
+  border: 1px solid var(--border);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.nt-search:focus-within .nt-search__kbd {
+  display: none;
+}
+
+/* ------------------------------ 窗口按钮 ------------------------------ */
+.nt-titlebar__right {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 100%;
+  margin-left: auto;
+}
+
+.nt-wbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 100%;
+  color: var(--text-secondary);
+  transition: background-color var(--dur-fast), color var(--dur-fast);
+}
+
+.nt-wbtn:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.nt-wbtn--close:hover {
+  background: #e81123;
+  color: #fff;
+}
+
+@media (max-width: 1000px) {
+  .nt-titlebar__name {
+    display: none;
+  }
+  .nt-search {
+    flex-basis: 300px;
+  }
+}

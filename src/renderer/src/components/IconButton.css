@@ -1,0 +1,72 @@
+.nt-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border-radius: var(--r-sm);
+  color: var(--text-secondary);
+  background: transparent;
+  transition:
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    transform var(--dur-fast) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.nt-icon-btn__inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.nt-icon-btn.is-round {
+  border-radius: var(--r-full);
+}
+
+.nt-icon-btn--ghost:hover:not(:disabled) {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.nt-icon-btn--ghost:active:not(:disabled) {
+  background: var(--active-bg);
+  transform: scale(0.94);
+}
+
+.nt-icon-btn--subtle {
+  background: var(--bg-tag);
+}
+
+.nt-icon-btn--subtle:hover:not(:disabled) {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.nt-icon-btn--solid {
+  background: var(--nt-red);
+  color: #fff;
+  box-shadow: var(--shadow-accent);
+}
+
+.nt-icon-btn--solid:hover:not(:disabled) {
+  background: var(--nt-red-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px var(--nt-red-glow);
+}
+
+.nt-icon-btn--solid:active:not(:disabled) {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
+.nt-icon-btn.is-active {
+  color: var(--nt-red);
+}
+
+.nt-icon-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}

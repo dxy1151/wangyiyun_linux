@@ -1,0 +1,480 @@
+/* ============================================================
+   全屏播放页
+   ============================================================ */
+
+.nt-ppage {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #fff;
+  background: #0d0d10;
+  animation: nt-fade-in 0.3s var(--ease);
+  -webkit-app-region: no-drag;
+}
+
+.nt-ppage--empty {
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-app);
+  color: var(--text-primary);
+}
+
+/* ------------------------------ 背景 ------------------------------ */
+.nt-ppage__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nt-ppage__bg-img {
+  position: absolute;
+  inset: -20%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(60px) saturate(1.7) brightness(0.52);
+  transform: scale(1.2);
+  opacity: 0.85;
+}
+
+.nt-ppage__bg-tint {
+  position: absolute;
+  inset: 0;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+}
+
+/* 底部/顶部渐变压暗，保证文字可读 */
+.nt-ppage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.14) 26%, rgba(0, 0, 0, 0.16) 62%, rgba(0, 0, 0, 0.66) 100%);
+  pointer-events: none;
+}
+
+.nt-ppage__topbar,
+.nt-ppage__main,
+.nt-ppage__footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ------------------------------ 顶栏 ------------------------------ */
+.nt-ppage__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 22px 6px;
+  flex: 0 0 auto;
+  -webkit-app-region: drag;
+}
+
+.nt-ppage__close,
+.nt-ppage__topbar-right,
+.nt-ppage__topbar-right .nt-icon-btn {
+  -webkit-app-region: no-drag;
+}
+
+.nt-ppage__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: background-color var(--dur-fast), transform var(--dur-fast) var(--ease);
+}
+
+.nt-ppage__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.nt-ppage--empty .nt-ppage__close {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  color: var(--text-secondary);
+  background: var(--bg-tag);
+}
+
+.nt-ppage__topbar-title {
+  font-size: var(--fs-sm);
+  letter-spacing: 1.4px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.nt-ppage__topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nt-ppage__topbar .nt-icon-btn {
+  color: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.nt-ppage__topbar .nt-icon-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.nt-ppage__topbar .nt-icon-btn.is-active {
+  color: var(--nt-red);
+}
+
+/* ------------------------------ 主体 ------------------------------ */
+.nt-ppage__main {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(320px, 1.08fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 14px clamp(24px, 6vw, 96px);
+}
+
+/* 左：唱片 + 信息 */
+.nt-ppage__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  min-width: 0;
+}
+
+.nt-ppage__disc-wrap {
+  position: relative;
+  width: min(340px, 34vh, 100%);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nt-ppage__disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, #1b1b1f 0%, #0b0b0e 62%, #15151a 100%);
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.62),
+    inset 0 0 60px rgba(255, 255, 255, 0.05);
+  animation: nt-spin 26s linear infinite;
+  animation-play-state: paused;
+}
+
+.nt-ppage__disc-wrap.is-playing .nt-ppage__disc {
+  animation-play-state: running;
+}
+
+/* 唱片纹路 */
+.nt-ppage__grooves {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.055) 0px,
+    rgba(255, 255, 255, 0.055) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+  pointer-events: none;
+}
+
+/* 中央封面 */
+.nt-ppage__disc-cover {
+  position: relative;
+  width: 64%;
+  height: 64%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.55);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.nt-ppage__disc-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #0d0d10;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.nt-ppage__buffering {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.85);
+  border-right-color: rgba(255, 255, 255, 0.34);
+  animation: nt-spin 0.9s linear infinite;
+  pointer-events: none;
+}
+
+/* 歌曲信息 */
+.nt-ppage__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.nt-ppage__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  max-width: 100%;
+}
+
+.nt-ppage__title {
+  font-size: clamp(19px, 2.1vw, 27px);
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.5);
+  max-width: 100%;
+}
+
+.nt-ppage__like {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color var(--dur-fast), transform var(--dur-fast) var(--ease), background-color var(--dur-fast);
+}
+
+.nt-ppage__like:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  transform: scale(1.08);
+}
+
+.nt-ppage__like.is-liked {
+  color: #ff5c6c;
+}
+
+.nt-ppage__submeta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: var(--fs-md);
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.nt-ppage__artist-link,
+.nt-ppage__album-link {
+  cursor: pointer;
+  transition: color var(--dur-fast);
+}
+
+.nt-ppage__artist-link:hover,
+.nt-ppage__album-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.nt-ppage__sep {
+  opacity: 0.5;
+}
+
+/* 右：歌词 */
+.nt-ppage__lyrics-wrap {
+  position: relative;
+  height: min(460px, 52vh);
+  min-width: 0;
+}
+
+.nt-ppage__lyrics {
+  height: 100%;
+}
+
+/* ------------------------------ 底部控制 ------------------------------ */
+.nt-ppage__footer {
+  flex: 0 0 auto;
+  padding: 0 clamp(24px, 5vw, 88px) 22px;
+}
+
+.nt-ppage__progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.nt-ppage__progress-row .nt-slider__track {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nt-ppage__progress-row .nt-slider__hover-fill {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.nt-ppage__time {
+  flex: 0 0 auto;
+  min-width: 42px;
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.6);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.nt-ppage__controls {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.nt-ppage__controls-left {
+  display: flex;
+  align-items: center;
+}
+
+.nt-ppage__controls-center {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nt-ppage__controls-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.nt-ppage__footer .nt-icon-btn {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.nt-ppage__footer .nt-icon-btn:hover:not(:disabled) {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.nt-ppage__footer .nt-icon-btn.is-active {
+  color: var(--nt-red);
+}
+
+.nt-ppage__play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fff;
+  color: #1c1c21;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.42);
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.nt-ppage__play:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.nt-ppage__play:active {
+  transform: scale(0.96);
+}
+
+.nt-ppage__play svg {
+  margin-left: 2px;
+}
+
+/* 音量滑块在深色背景上更亮 */
+.nt-ppage__controls-right .nt-volume__track {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ------------------------------ 响应式 ------------------------------ */
+@media (max-width: 1000px) {
+  .nt-ppage__main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 18px;
+    padding: 8px 26px;
+    align-content: start;
+  }
+  .nt-ppage__left {
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+  }
+  .nt-ppage__disc-wrap {
+    width: min(180px, 22vh);
+    flex: 0 0 auto;
+  }
+  .nt-ppage__meta {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .nt-ppage__title-row {
+    justify-content: flex-start;
+  }
+  .nt-ppage__submeta {
+    justify-content: flex-start;
+    font-size: var(--fs-sm);
+  }
+  .nt-ppage__lyrics-wrap {
+    height: auto;
+    min-height: 0;
+    flex: 1;
+  }
+  .nt-ppage__controls-center {
+    gap: 14px;
+  }
+  .nt-ppage__controls-right .nt-volume {
+    display: none;
+  }
+}
+
+@media (max-height: 620px) {
+  .nt-ppage__disc-wrap {
+    width: min(200px, 26vh);
+  }
+  .nt-ppage__lyrics-wrap {
+    height: min(300px, 40vh);
+  }
+  .nt-ppage__footer {
+    padding-bottom: 14px;
+  }
+  .nt-ppage__play {
+    width: 46px;
+    height: 46px;
+  }
+}

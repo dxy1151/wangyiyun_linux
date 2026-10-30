@@ -1,0 +1,144 @@
+/* ============================================================
+   我的音乐
+   ============================================================ */
+
+.nt-mymusic__cover {
+  flex: 0 0 auto;
+  width: 168px;
+  height: 168px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-cover);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* 四宫格拼贴 */
+.nt-mymusic__collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+}
+
+.nt-mymusic__collage .nt-cover,
+.nt-mymusic__collage-empty {
+  width: 100%;
+  height: 100%;
+}
+
+.nt-mymusic__collage-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nt-mymusic__cover-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.78);
+  background: linear-gradient(140deg, #ff6b81, #c0263c);
+}
+
+.nt-mymusic__cover-empty.is-recent {
+  background: linear-gradient(140deg, #5b74c9, #2c3e78);
+}
+
+/* Tab */
+.nt-mymusic__tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nt-mymusic__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 15px;
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  transition: color var(--dur-fast);
+}
+
+.nt-mymusic__tab::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: var(--r-full);
+  background: var(--nt-red);
+  transform: scaleX(0);
+  transition: transform var(--dur) var(--ease);
+}
+
+.nt-mymusic__tab:hover {
+  color: var(--text-primary);
+}
+
+.nt-mymusic__tab.is-active {
+  color: var(--nt-red);
+  font-weight: 600;
+}
+
+.nt-mymusic__tab.is-active::after {
+  transform: scaleX(1);
+}
+
+.nt-mymusic__tab-count {
+  padding: 0 6px;
+  border-radius: var(--r-full);
+  background: var(--bg-tag);
+  font-size: 10px;
+  line-height: 16px;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.nt-mymusic__footer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  background: var(--bg-card);
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+}
+
+.nt-mymusic__clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  transition: color var(--dur-fast), background-color var(--dur-fast);
+}
+
+.nt-mymusic__clear:hover {
+  color: var(--nt-red);
+  background: var(--nt-red-soft);
+}
+
+@media (max-width: 1000px) {
+  .nt-mymusic__cover {
+    width: 132px;
+    height: 132px;
+  }
+}

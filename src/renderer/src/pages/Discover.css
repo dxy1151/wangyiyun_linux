@@ -1,0 +1,56 @@
+.nt-discover__banner-skel {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.nt-discover__banner-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 120px;
+  border-radius: var(--r-lg);
+  background: var(--bg-card);
+  color: var(--text-tertiary);
+  font-size: var(--fs-md);
+}
+
+/* 双栏：新歌 + 榜单 */
+.nt-discover__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.nt-discover__ranks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.nt-discover__rank-skel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.nt-discover__list-skel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 6px 0;
+}
+
+.nt-discover__row-skel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 1180px) {
+  .nt-discover__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+}

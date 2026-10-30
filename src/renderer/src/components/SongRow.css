@@ -1,0 +1,228 @@
+.nt-songrow {
+  display: grid;
+  grid-template-columns: 44px 48px minmax(140px, 2.2fr) minmax(90px, 1.2fr) minmax(80px, 1.4fr) 56px 64px;
+  align-items: center;
+  gap: 10px;
+  height: 54px;
+  padding: 0 10px;
+  border-radius: var(--r-sm);
+  color: var(--text-secondary);
+  font-size: var(--fs-md);
+  transition: background-color var(--dur-fast) ease;
+  position: relative;
+}
+
+.nt-songrow.is-dense {
+  height: 40px;
+  gap: 8px;
+}
+
+.nt-songrow:hover {
+  background: var(--hover-bg);
+}
+
+.nt-songrow.is-active {
+  background: var(--nt-red-soft);
+}
+
+.nt-songrow.is-active .nt-songrow__name {
+  color: var(--nt-red);
+  font-weight: 600;
+}
+
+.nt-songrow:hover .nt-songrow__name {
+  color: var(--text-primary);
+}
+
+.nt-songrow.is-active:hover .nt-songrow__name {
+  color: var(--nt-red);
+}
+
+/* ------------------------------ 序号 ------------------------------ */
+.nt-songrow__idx {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.nt-songrow__num {
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  transition: opacity var(--dur-fast);
+}
+
+.nt-songrow__play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nt-red);
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+}
+
+.nt-songrow:hover .nt-songrow__num {
+  opacity: 0;
+}
+
+.nt-songrow:hover .nt-songrow__play {
+  opacity: 1;
+}
+
+.nt-songrow.is-active .nt-songrow__play {
+  display: none;
+}
+
+/* 播放中的律动条 */
+.nt-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.nt-eq i {
+  display: block;
+  width: 2px;
+  height: 100%;
+  border-radius: 1px;
+  background: var(--nt-red);
+  transform-origin: bottom;
+  transform: scaleY(0.4);
+}
+
+.nt-eq.is-playing i:nth-child(1) {
+  animation: nt-bars 0.9s ease-in-out infinite;
+}
+.nt-eq.is-playing i:nth-child(2) {
+  animation: nt-bars 0.75s ease-in-out infinite 0.18s;
+}
+.nt-eq.is-playing i:nth-child(3) {
+  animation: nt-bars 1.05s ease-in-out infinite 0.34s;
+}
+
+/* ------------------------------ 封面 ------------------------------ */
+.nt-songrow__cover {
+  display: flex;
+  align-items: center;
+}
+
+.nt-songrow__cover .nt-cover {
+  transition: transform var(--dur) var(--ease);
+}
+
+.nt-songrow:hover .nt-songrow__cover .nt-cover {
+  transform: scale(1.04);
+}
+
+/* ------------------------------ 文本 ------------------------------ */
+.nt-songrow__title {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  min-width: 0;
+  color: var(--text-primary);
+}
+
+.nt-songrow__name {
+  min-width: 0;
+  transition: color var(--dur-fast);
+}
+
+.nt-songrow__alias {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+}
+
+.nt-songrow__artist {
+  min-width: 0;
+  font-size: var(--fs-sm);
+}
+
+.nt-songrow__artist-link {
+  cursor: pointer;
+  transition: color var(--dur-fast);
+}
+
+.nt-songrow__artist-link:hover {
+  color: var(--nt-red);
+  text-decoration: underline;
+}
+
+.nt-songrow__album {
+  min-width: 0;
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color var(--dur-fast);
+}
+
+.nt-songrow__album:hover {
+  color: var(--text-primary);
+}
+
+.nt-songrow__duration {
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  padding-right: 4px;
+}
+
+/* ------------------------------ 操作 ------------------------------ */
+.nt-songrow__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+}
+
+.nt-songrow:hover .nt-songrow__actions,
+.nt-songrow.is-active .nt-songrow__actions {
+  opacity: 1;
+}
+
+.nt-songrow__act {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--r-xs);
+  color: var(--text-tertiary);
+  transition: color var(--dur-fast), background-color var(--dur-fast);
+}
+
+.nt-songrow__act:hover {
+  color: var(--text-primary);
+  background: var(--active-bg);
+}
+
+.nt-songrow__act.is-liked {
+  color: var(--nt-red);
+}
+
+/* 窄窗口：隐藏专辑列 */
+@media (max-width: 1080px) {
+  .nt-songrow {
+    grid-template-columns: 40px 48px minmax(120px, 2fr) minmax(80px, 1.2fr) 52px 60px;
+  }
+  .nt-songrow__album {
+    display: none;
+  }
+}
+
+@media (max-width: 940px) {
+  .nt-songrow__actions {
+    opacity: 1;
+  }
+}

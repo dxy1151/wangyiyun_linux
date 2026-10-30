@@ -1,0 +1,192 @@
+.nt-carousel {
+  position: relative;
+  width: 100%;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.nt-carousel__track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.62s var(--ease);
+  will-change: transform;
+}
+
+.nt-carousel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 背景大图：模糊铺满 + 轻微放大 */
+.nt-carousel__bg {
+  position: absolute;
+  inset: -8%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(0.4px) saturate(1.15);
+  transform: scale(1.06);
+  transition: transform 6s linear;
+}
+
+.nt-carousel__slide:hover .nt-carousel__bg {
+  transform: scale(1.1);
+}
+
+/* 渐变遮罩保证文字可读 */
+.nt-carousel__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.44) 46%, rgba(0, 0, 0, 0.12) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.42), transparent 55%);
+}
+
+.nt-carousel__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 100%;
+  padding: 22px 30px;
+  max-width: 66%;
+}
+
+.nt-carousel__thumb {
+  flex: 0 0 auto;
+  width: 118px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.nt-carousel__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  color: #fff;
+  animation: nt-fade-up 0.5s var(--ease);
+}
+
+.nt-carousel__title {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.32;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.2px;
+}
+
+.nt-carousel__sub {
+  font-size: var(--fs-md);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.nt-carousel__play {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  height: 30px;
+  margin-top: 2px;
+  padding: 0 15px;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.94);
+  color: #1c1c21;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: background-color var(--dur-fast), transform var(--dur-fast) var(--ease), box-shadow var(--dur);
+}
+
+.nt-carousel__play:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* 左右箭头 */
+.nt-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.36);
+  color: rgba(255, 255, 255, 0.88);
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity var(--dur) var(--ease), background-color var(--dur-fast);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.nt-carousel:hover .nt-carousel__arrow {
+  opacity: 1;
+}
+
+.nt-carousel__arrow:hover {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.nt-carousel__arrow.is-prev {
+  left: 12px;
+}
+
+.nt-carousel__arrow.is-next {
+  right: 12px;
+}
+
+/* 指示点 */
+.nt-carousel__dots {
+  position: absolute;
+  left: 30px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+}
+
+.nt-carousel__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.42);
+  transition: width var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+.nt-carousel__dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.nt-carousel__dot.is-active {
+  width: 18px;
+  background: #fff;
+}
+
+@media (max-width: 1000px) {
+  .nt-carousel__thumb {
+    width: 84px;
+  }
+  .nt-carousel__content {
+    padding: 16px 20px;
+    max-width: 80%;
+  }
+  .nt-carousel__title {
+    font-size: var(--fs-lg);
+  }
+  .nt-carousel__dots {
+    left: 20px;
+  }
+}
